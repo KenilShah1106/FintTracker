@@ -34,8 +34,8 @@
                 <div class="card-body p-0">
                     <!-- Nested Row within Card Body -->
                     <div class="row">
-                        <div class="col-lg-6 d-none d-lg-flex align-item-center justify-content-center">
-                            <img src="{{asset("./assets/img/budget-buddha-logo.png")}}" alt="">
+                        <div class="col-lg-6 d-none d-lg-flex align-items-center justify-content-center">
+                            <img src="{{asset("./assets/img/logos/moneywiz-logo-1.png")}}" alt="" width="auto" height="50%">
                         </div>
                         <div class="col-lg-6">
                             <div class="p-5">
