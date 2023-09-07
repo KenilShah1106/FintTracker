@@ -4,8 +4,8 @@
             <nav id="site-navigation" class="main-nav">
                 <div class="site-logo">
                     <a href="index.html" class="logo">
-                        <h4 class="main-logo color-light">FinTracker</h4>
-                        <h4 class="logo-sticky">FinTracker</h4>
+                        <h4 class="main-logo color-light">MoneyWiz</h4>
+                        <h4 class="logo-sticky">MoneyWiz</h4>
                         {{-- <img src="assets/img/logo-social-sticky.png" alt="site logo" class="logo-sticky"> --}}
                     </a>
                 </div>
@@ -15,7 +15,7 @@
                         <div class="mobile-offcanvas-logo">
                             <a href="index.html">
                                 {{-- <img src="assets/img/logo-social-sticky.png" alt="site logo" class="logo-sticky"> --}}
-                                <h4 class="logo-sticky">FinTracker</h4>
+                                <h4 class="logo-sticky">MoneyWiz</h4>
                             </a>
                         </div>
                         <div class="close-menu" id="page-close-main-menu">

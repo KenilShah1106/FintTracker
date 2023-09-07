@@ -46,7 +46,7 @@
                             <div class="footer-logo">
                                 <a href="#"><img src="assets/img/logo-social-sticky.png" alt=""></a>
                             </div>
-                            <p class="copyright-text">Copyright © 2023 FinTracker by <strong>The Primitives.</strong> All Rights Reserved</p>
+                            <p class="copyright-text">Copyright © 2023 MoneyWiz by <strong>The Primitives.</strong> All Rights Reserved</p>
 
                             <ul class="footer-social">
                                 <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>

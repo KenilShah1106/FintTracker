@@ -1,1 +1,1 @@
-# FinTracker
+# MoneyWiz

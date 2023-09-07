@@ -5,7 +5,7 @@ print(find_library("gs")) #will display libgs.so.9 if installed; will print None
 import camelot
 fileName = sys.argv[1]
 password = sys.argv[2]
-path = "E:\\sync\\college\\S.P.I.T\\sem-6\\MiniProject\\fintracker\\public\\assets\\uploads\\account_statements\\{}".format(fileName)
+path = "E:\\sync\\college\\S.P.I.T\\sem-6\\MiniProject\\moneywiz\\public\\assets\\uploads\\account_statements\\{}".format(fileName)
 
 tables = camelot.read_pdf(path ,pages='all', password=password)
 

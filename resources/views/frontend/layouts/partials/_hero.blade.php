@@ -7,7 +7,7 @@
                         Your Comprehensive <strong>Financial Dashboard</strong>
                     </h2>
                     <p class="wow fadeInUp" data-wow-delay="0.3s">
-                       Track your finances easily with <strong>FinTracker's</strong><br> all new modern <strong>Dashboard</strong> with various graphical representation containing insights about your <strong>Financial Account Statement</strong>
+                       Track your finances easily with <strong>MoneyWiz's</strong><br> all new modern <strong>Dashboard</strong> with various graphical representation containing insights about your <strong>Financial Account Statement</strong>
                     </p>
                     <a href="{{route("register")}}" class="so-ban-btn wow fadeInUp" data-wow-delay="0.5s"><i class="ei ei-icon_plus"></i>Join Us</a>
                 </div>

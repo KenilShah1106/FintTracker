@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
     {
         User::create([
             'name' => 'Tech Admin',
-            'email' => 'tech@fintracker.com',
+            'email' => 'tech@moneywiz.com',
             'password' => Hash::make('password'),
             'per_month_salary' => 50000,
         ]);

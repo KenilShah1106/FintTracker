@@ -6,7 +6,7 @@
                 <img style="max-height: 80px;" src="{{asset("./assets/img/budget-buddha-logo.png")}}" class="navbar-brand-img img-responsive" alt="main_logo" width="45%">
             </div>
             <div class="d-flex w-100 justify-content-center">
-                <span class="ms-2 fs-5 fw-bolder text-center">FinTracker</span>
+                <span class="ms-2 fs-5 fw-bolder text-center">MoneyWiz</span>
             </div>
         </a>
     </div>
