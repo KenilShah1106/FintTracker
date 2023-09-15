@@ -22,7 +22,7 @@
         </div>
     </div>
 
-    <div class="row justify-content-around mb-5 mt-4">
+    <div class="row justify-content-around mb-3 mt-4">
         <div class="card-group col-md-2">
             <div class="card">
                 <div class="card-body pt-2">
@@ -89,7 +89,11 @@
             </div>
         </div>
     </div>
-
+    <div class="d-flex w-100 justify-content-end">
+        <button class="btn btn-outline-primary" id="generateReport" disabled>
+            Generate Report
+        </button>
+    </div>
     <div class="row justify-content-sm-around">
         <div class="card mb-3 p-3 d-flex justify-content-center col-md-5">
             <div class="card-title p-3 fw-bolder fs-2">Transaction Types</div>
@@ -146,7 +150,8 @@
 @endsection
 
 @section('page-scripts')
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+
     <script>
 
         let seriesArray = <?php echo json_encode($typePercentageMapping); ?>;;
@@ -306,7 +311,6 @@
         let foodData = categoryMonthAmountWiseData['food']
         let miscData = categoryMonthAmountWiseData['miscellaneous']
 
-        console.log(categoryMonthAmountWiseData);
         var categoryMonthAmountOptions = {
             chart: {
                 type: 'bar',
@@ -362,22 +366,93 @@
             }
         };
 
-        var lineChartType = new ApexCharts(document.querySelector("#transaction_type_line"), typeOptionsLine);
-        lineChartType.render();
+        var transactionLineChart = new ApexCharts(document.querySelector("#transaction_type_line"), typeOptionsLine);
+        transactionLineChart.render();
 
-        var lineChartCategory = new ApexCharts(document.querySelector("#category_line"), categoriesOptionsLine);
-        lineChartCategory.render();
+        var categoryLineChart = new ApexCharts(document.querySelector("#category_line"), categoriesOptionsLine);
+        categoryLineChart.render();
 
-        var chart = new ApexCharts(document.querySelector("#transaction_type_pie"), typeOptions);
-        var chart1 = new ApexCharts(document.querySelector("#category_pie"), categoriesOptions);
-        chart.render();
-        chart1.render();
+        let transactionPieChart = new ApexCharts(document.querySelector("#transaction_type_pie"), typeOptions);
+        let categoryPieChart = new ApexCharts(document.querySelector("#category_pie"), categoriesOptions);
+
+        transactionPieChart.render();
+        // setTimeout(function () {
+        //     chart.dataURI().then(({ imgURI, blob }) => {
+        //         $.ajax({
+        //             url: "{{route('storeImageFromUri')}}",
+        //             type: "POST",
+        //             data: {
+        //                 _token: "{{ csrf_token() }}",
+        //                 image: imgURI,
+        //                 type: 'transaction_type_pie'
+        //             },
+        //             success: function (data) {
+        //                 console.log(data);
+        //             }
+        //         });
+        //     });
+        //         // var pdf = new jsPDF();
+        //         // pdf.addImage(imgURI, 'PNG', 50, 50);
+        //         // pdf.save("download.pdf");
+        // }, 1000);
+
+        categoryPieChart.render();
 
         var categoryAmountChart = new ApexCharts(document.querySelector("#category_amount_line"), categoryAmountOptions);
         categoryAmountChart.render();
 
         var categoryMonthAmountChart = new ApexCharts(document.querySelector("#category_month_amount_line"), categoryMonthAmountOptions);
         categoryMonthAmountChart.render();
+
+        setTimeout(function () {
+            $("#generateReport").prop('disabled', false);
+            $("#generateReport").click(function () {
+                generateReport(transactionPieChart);
+            });
+        }, 1000);
+
+        function generateReport(transactionPieChart) {
+            let transactionPieImage,categoryPieImage, categoryAmountImage, categoryMonthAmountImage, transactionLineImage, categoryLineImage;
+            let promise1 = transactionPieChart.dataURI().then(({ imgURI, blob }) => {
+                transactionPieImage = imgURI;
+            });
+
+            let promise2 = categoryPieChart.dataURI().then(({ imgURI, blob }) => {
+                categoryPieImage = imgURI;
+            });
+
+            let promise3 = transactionLineChart.dataURI().then(({ imgURI, blob }) => {
+                transactionLineImage = imgURI;
+            });
+
+            let promise4 = categoryLineChart.dataURI().then(({ imgURI, blob }) => {
+                categoryLineImage = imgURI;
+            });
+
+            let promise5 =categoryAmountChart.dataURI().then(({ imgURI, blob }) => {
+                categoryAmountImage = imgURI;
+            });
+
+            let promise6 =categoryMonthAmountChart.dataURI().then(({ imgURI, blob }) => {
+                categoryMonthAmountImage = imgURI;
+            });
+
+            const promises = [promise1, promise2, promise3, promise4, promise5, promise6];
+
+            Promise.all(promises).then(() => {
+                $.ajax({
+                        url: "{{route('storeImageFromUri')}}",
+                        type: "POST",
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            images: [transactionPieImage, categoryPieImage, categoryAmountImage, categoryMonthAmountImage, transactionLineImage, categoryLineImage],
+                        },
+                        success: function (data) {
+                            console.log(data);
+                        }
+                });
+            });
+        }
 
     </script>
 @endsection

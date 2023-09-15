@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Transaction;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class DashboardController extends Controller
 {
@@ -85,5 +87,21 @@ class DashboardController extends Controller
 
         return view('dashboard', compact('typePercentageMapping', 'transactionsTypes', 'categoryPercentageMapping', 'categories', 'monthWiseData',
         'categoryWiseData', 'openingBalance', 'closingBalance', 'highestSpend', 'totalMoneyIn', 'totalMoneyOut', 'categoryAmountWiseData', 'categoryMonthAmountWiseData'));
+    }
+
+    public function storeImageFromUri(Request $request) {
+        $images = $request->get('images');
+        $time = time();
+        $path = public_path().'\assets\img\reports\report-'.$time;
+        File::makeDirectory($path, 0777, true, true);
+        foreach($images as $i => $image){
+            $image = $images[$i];
+            $image = str_replace('data:image/png;base64,', '', $image);
+            $image = str_replace(' ', '+', $image);
+            $image = base64_decode($image);
+            $imageName = 'image_'.$time.'_'.(++$i).'.png';
+            $file = $path . "/" .$imageName;
+            file_put_contents($file, $image);
+        }
     }
 }

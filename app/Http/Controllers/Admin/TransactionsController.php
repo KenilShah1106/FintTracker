@@ -47,7 +47,12 @@ class TransactionsController extends Controller
     public function externalStore(Request $request) {
         DB::transaction(function () use($request){
             $date = Carbon::createFromFormat('d/m/Y', $request->date)->format('Y-m-d');
-            $balance = Transaction::latest()->get()->first()->balance;
+            if(Transaction::count('*') > 0) {
+                $balance = Transaction::latest()->get()->first()->balance;
+            }
+            else {
+                $balance = 0;
+            }
             Transaction::create([
                 'reference_no' => $request->ref_no,
                 'date' => $date,

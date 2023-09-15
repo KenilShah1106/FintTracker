@@ -960,7 +960,7 @@ eval("\n\nvar bind = __webpack_require__(/*! ./helpers/bind */ \"./node_modules/
   \*****************************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("__webpack_require__(/*! ./bootstrap */ \"./resources/js/bootstrap.js\"); // require('jquery/dist/jquery.min');//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9yZXNvdXJjZXMvanMvYXBwLmpzLmpzIiwibWFwcGluZ3MiOiJBQUFBQSxtQkFBTyxDQUFDLGdEQUFELENBQVAsQyxDQUNBIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vLy4vcmVzb3VyY2VzL2pzL2FwcC5qcz9jZWQ2Il0sInNvdXJjZXNDb250ZW50IjpbInJlcXVpcmUoJy4vYm9vdHN0cmFwJyk7XHJcbi8vIHJlcXVpcmUoJ2pxdWVyeS9kaXN0L2pxdWVyeS5taW4nKTtcclxuIl0sIm5hbWVzIjpbInJlcXVpcmUiXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./resources/js/app.js\n");
+eval("window.jsPDF = window.jspdf.jsPDF;\n\n__webpack_require__(/*! ./bootstrap */ \"./resources/js/bootstrap.js\"); // require('jquery/dist/jquery.min');//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9yZXNvdXJjZXMvanMvYXBwLmpzLmpzIiwibWFwcGluZ3MiOiJBQUFBQSxNQUFNLENBQUNDLEtBQVAsR0FBZUQsTUFBTSxDQUFDRSxLQUFQLENBQWFELEtBQTVCOztBQUNBRSxtQkFBTyxDQUFDLGdEQUFELENBQVAsQyxDQUNBIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vLy4vcmVzb3VyY2VzL2pzL2FwcC5qcz9jZWQ2Il0sInNvdXJjZXNDb250ZW50IjpbIndpbmRvdy5qc1BERiA9IHdpbmRvdy5qc3BkZi5qc1BERjtcbnJlcXVpcmUoJy4vYm9vdHN0cmFwJyk7XG4vLyByZXF1aXJlKCdqcXVlcnkvZGlzdC9qcXVlcnkubWluJyk7XG4iXSwibmFtZXMiOlsid2luZG93IiwianNQREYiLCJqc3BkZiIsInJlcXVpcmUiXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./resources/js/app.js\n");
 
 /***/ }),
 
