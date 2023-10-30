@@ -90,19 +90,27 @@
         </div>
     </div>
     <div class="d-flex w-100 justify-content-end">
-        <button class="btn btn-outline-primary" id="generateReport" disabled>
+        {{-- <button class="btn btn-outline-primary" id="generateReport" disabled>
             Generate Report
+        </button> --}}
+        <button class="btn btn-primary" type="button" id="generateReport" disabled>
+            <div class="d-flex">
+                <div class="d-none me-2" id="spinnerWrapper">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                </div>
+                Generate Report
+            </div>
         </button>
     </div>
     <div class="row justify-content-sm-around">
-        <div class="card mb-3 p-3 d-flex justify-content-center col-md-5">
+        <div class="card mb-3 p-1 d-flex justify-content-center col-md-5">
             <div class="card-title p-3 fw-bolder fs-2">Transaction Types</div>
             <div class="card-body p-3">
                 <div id="transaction_type_pie">
                 </div>
             </div>
         </div>
-        <div class="card mb-3 p-3 d-flex justify-content-center col-md-5">
+        <div class="card mb-3 p-1 d-flex justify-content-center col-md-5">
             <div class="card-title p-3 fw-bolder fs-2">Transaction Categories</div>
             <div class="card-body p-3">
                 <div id="category_pie">
@@ -115,14 +123,14 @@
 
 
     <div class="row justify-content-sm-around mt-5">
-        <div class="card mb-3 p-3 d-flex justify-content-center col-md-5">
+        <div class="card mb-3 p-1 d-flex justify-content-center col-md-5">
             <div class="card-title p-3 fw-bolder fs-2">Transaction trends by month</div>
             <div class="card-body p-3">
                 <div id="transaction_type_line">
                 </div>
             </div>
         </div>
-        <div class="card mb-3 p-3 d-flex justify-content-center col-md-5">
+        <div class="card mb-3 p-1 d-flex justify-content-center col-md-5">
             <div class="card-title p-3 fw-bolder fs-2">Transaction trends by categories</div>
             <div class="card-body p-3">
                 <div id="category_line">
@@ -132,14 +140,14 @@
     </div>
 
     <div class="row justify-content-sm-around mt-5">
-        <div class="card mb-3 p-3 d-flex justify-content-center col-md-5">
+        <div class="card mb-3 p-1 d-flex justify-content-center col-md-5">
             <div class="card-title p-3 fw-bolder fs-2">Category trends by amount spend</div>
             <div class="card-body p-3">
                 <div id="category_amount_line">
                 </div>
             </div>
         </div>
-        <div class="card mb-3 p-3 d-flex justify-content-center col-md-5">
+        <div class="card mb-3 p-1 d-flex justify-content-center col-md-5">
             <div class="card-title p-3 fw-bolder fs-2">Categories and amount spend in each month</div>
             <div class="card-body p-3">
                 <div id="category_month_amount_line">
@@ -154,10 +162,10 @@
 
     <script>
 
-        let seriesArray = <?php echo json_encode($typePercentageMapping); ?>;;
+        let transactionTypesData = <?php echo json_encode($typePercentageMapping); ?>;;
         let labelsArray = <?php echo json_encode($transactionsTypes); ?>;;
         var typeOptions = {
-            series: seriesArray,
+            series: transactionTypesData,
             chart: {
                 width: 500,
                 type: 'pie',
@@ -176,11 +184,10 @@
             }]
         };
 
-        seriesArray = <?php echo json_encode($categoryPercentageMapping); ?>;
+        let categoryPercentData = <?php echo json_encode($categoryPercentageMapping); ?>;
         labelsArray = <?php echo json_encode($categories); ?>;
-
         var categoriesOptions = {
-            series: seriesArray,
+            series: categoryPercentData,
             chart: {
                 width: 500,
                 type: 'pie',
@@ -404,9 +411,12 @@
         var categoryMonthAmountChart = new ApexCharts(document.querySelector("#category_month_amount_line"), categoryMonthAmountOptions);
         categoryMonthAmountChart.render();
 
+        const generateReportBtn = $('#generateReport');
         setTimeout(function () {
-            $("#generateReport").prop('disabled', false);
-            $("#generateReport").click(function () {
+            generateReportBtn.prop('disabled', false);
+            generateReportBtn.click(function () {
+                generateReportBtn.prop('disabled', true);
+                $('#spinnerWrapper').removeClass('d-none');
                 generateReport(transactionPieChart);
             });
         }, 1000);
@@ -440,15 +450,27 @@
             const promises = [promise1, promise2, promise3, promise4, promise5, promise6];
 
             Promise.all(promises).then(() => {
+
                 $.ajax({
                         url: "{{route('storeImageFromUri')}}",
                         type: "POST",
                         data: {
                             _token: "{{ csrf_token() }}",
-                            images: [transactionPieImage, categoryPieImage, categoryAmountImage, categoryMonthAmountImage, transactionLineImage, categoryLineImage],
+                            images: [transactionPieImage, categoryPieImage, transactionLineImage, categoryLineImage, categoryAmountImage, categoryMonthAmountImage],
+                            stats: [transactionTypesData, categoryPercentData, monthWiseData, categoryWiseData, categoryAmountWiseData, categoryMonthAmountWiseData]
+                        },
+                        xhrFields: {
+                            responseType: 'blob'
                         },
                         success: function (data) {
                             console.log(data);
+                            generateReportBtn.prop('disabled', false);
+                            $('#spinnerWrapper').addClass('d-none');
+                            var blob = new Blob([data]);
+                            var link = document.createElement('a');
+                            link.href = window.URL.createObjectURL(blob);
+                            link.download = "report.pdf";
+                            link.click();
                         }
                 });
             });

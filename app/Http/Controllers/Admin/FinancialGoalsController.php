@@ -20,7 +20,7 @@ class FinancialGoalsController extends Controller
             $totalDebit += Transaction::whereMonth('date', ''.$i)->whereNotNull('amt_debit')->sum('amt_debit');
         }
         $amountRemaining = abs($totalDebit - $totalSalary);
-        $divisionBtwnGoals = 3$financialGoals->count() != 0 ? ($amountRemaining / $financialGoals->count()) : 0;
+        $divisionBtwnGoals = $financialGoals->count() != 0 ? ($amountRemaining / $financialGoals->count()) : 0;
         // dd($totalDebit, $amountRemaining, $divisionBtwnGoals);
         foreach($financialGoals as $financialGoal) {
             $financialGoal->percentage = ceil(($divisionBtwnGoals / $financialGoal->amount) * 100);

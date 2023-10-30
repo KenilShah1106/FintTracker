@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
 
-    <title>{{ config('app.name', 'Paws Hunter') }}</title>
+    <title>{{ config('app.name', 'MoneyWiz') }}</title>
 
 
     <link rel="apple-touch-icon" sizes="76x76" href="{{asset("./assets/img/paws-hunger-logo.png")}}">

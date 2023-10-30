@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Helpers\Constants\TransactionConstants;
 use App\Http\Controllers\Controller;
+use App\Jobs\GeneratePdf;
 use App\Models\Category;
 use App\Models\Transaction;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class DashboardController extends Controller
 {
@@ -23,6 +26,7 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
     public function dashboard()
     {
 
@@ -44,7 +48,8 @@ class DashboardController extends Controller
         $categoryAmountWiseData = [];
         foreach($categories as $category) {
             $temp = [];
-            $percentage = $categoriesCount == 0 ? 0 : (($transactions->where('category_id', $category->id)->count())/$categoriesCount)*100;;
+            $transactionCount = $transactions->count();
+            $percentage = ($categoriesCount == 0)|| ($transactionCount == 0) ? 0 : (($transactions->where('category_id', $category->id)->count())/$transactionCount)*100;
             $categoryWiseData[] = $transactions->where('category_id', $category->id)->count();
             $categoryAmountWiseData[] = $transactions->where('category_id', $category->id)->whereNotNull('amt_debit')->sum('amt_debit');
 
@@ -54,7 +59,6 @@ class DashboardController extends Controller
             }
 
             // $categoryMonthAmountWiseData[$category->name] = $transactions->where('category_id', $category->id)->whereNotNull('amt_debit')->sum('amt_debit');
-
 
             $categoryPercentageMapping[] = $percentage;
         }
@@ -84,24 +88,43 @@ class DashboardController extends Controller
         $highestSpend = $highestSpend == null ? 0 : $highestSpend;
         $totalMoneyIn = $currMonthTransactions->pluck('amt_credit')->sum();
         $totalMoneyOut = $currMonthTransactions->pluck('amt_debit')->sum();
-
         return view('dashboard', compact('typePercentageMapping', 'transactionsTypes', 'categoryPercentageMapping', 'categories', 'monthWiseData',
         'categoryWiseData', 'openingBalance', 'closingBalance', 'highestSpend', 'totalMoneyIn', 'totalMoneyOut', 'categoryAmountWiseData', 'categoryMonthAmountWiseData'));
     }
 
     public function storeImageFromUri(Request $request) {
+        set_time_limit(300);
         $images = $request->get('images');
+        $stats = $request->get('stats');
+        $transactionTypeStats = $stats[0];
+        $categoryPercentStats = $stats[1];
+        $monthWiseStats = $stats[2];
+        $categoryWiseStats = $stats[3];
+        $categoryAmountWiseStats = $stats[4];
+        $categoryMonthAmountWiseStats = $stats[5];
         $time = time();
         $path = public_path().'\assets\img\reports\report-'.$time;
         File::makeDirectory($path, 0777, true, true);
+        $paths = [];
         foreach($images as $i => $image){
             $image = $images[$i];
             $image = str_replace('data:image/png;base64,', '', $image);
             $image = str_replace(' ', '+', $image);
             $image = base64_decode($image);
             $imageName = 'image_'.$time.'_'.(++$i).'.png';
-            $file = $path . "/" .$imageName;
+            $file = $path . "\\" .$imageName;
+            array_push($paths, $file);
             file_put_contents($file, $image);
         }
+
+        $pdf = Pdf::loadView('report', compact('paths', 'transactionTypeStats', 'categoryPercentStats', 'monthWiseStats', 'categoryWiseStats', 'categoryAmountWiseStats', 'categoryMonthAmountWiseStats'));
+        $pdf->setPaper('A4', 'landscape');
+        $pdfPath = public_path() . '/assets/pdf/reports/report-'.$time;
+        File::makeDirectory($pdfPath, 0777, true, true);
+        $pdfFileName = $pdfPath . '/' . 'report-'.$time.'.pdf';
+        $pdf->save($pdfFileName);
+        File::deleteDirectory($path);
+        return $pdf->stream();
     }
+
 }

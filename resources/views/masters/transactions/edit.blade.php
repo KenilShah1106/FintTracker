@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('page-title', 'Add Transactions')
+@section('page-title', 'Edit Transaction')
 
 @section('page-content')
     <div class="p-4 bg-white border-radius-xl">

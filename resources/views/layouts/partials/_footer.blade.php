@@ -5,7 +5,7 @@
                     © <script>
                         document.write(new Date().getFullYear())
                     </script>,
-                    made with <i class="fa fa-inr m-1" aria-hidden="true"></i> by The Primitives
+                    made with <i class="fa fa-inr m-1" aria-hidden="true"></i> by MPK
                 </div>
         </div>
     </div>

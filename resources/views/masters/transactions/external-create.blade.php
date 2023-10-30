@@ -30,7 +30,7 @@
 
             <div class="form-group">
                 <label for="ref_no" class="form-control-label">Reference no.<span class="text-danger">*</span></label>
-                <input class="form-control" type="text" name="ref_no" id="ref_no" required placeholder="123">
+                <input class="form-control" type="text" name="ref_no" id="ref_no" value="{{$latestId}}" required placeholder="123" disabled readonly>
             </div>
             <div class="form-group">
                 <label for="date" class="form-control-label">Date<span class="text-danger">*</span></label>

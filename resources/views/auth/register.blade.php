@@ -22,16 +22,16 @@
 
 <body class="bg-primary">
 
-<div style="height: 100vh;" class="container d-flex flex-column justify-content-center">
+<div style="height: 100%;" class="container d-flex flex-column justify-content-center">
     <div class="card o-hidden border-0 shadow-lg my-5">
         <div class="card-body p-0">
             <!-- Nested Row within Card Body -->
-            <div class="row justify-content-center">
-                <div class="col-lg-5 d-flex w-100 justify-content-center align-items-center">
-                    <img src="{{asset("./assets/img/budget-buddha-logo.png")}}" alt="">
+            <div class="row">
+                <div class="col-lg-5 d-flex justify-content-center align-items-center">
+                    <img src="{{asset("./assets/img/logos/moneywiz-logo-1.png")}}" alt="" height="50%">
                 </div>
                 <div class="col-lg-7">
-                    <div class="p-2">
+                    <div class="p-5">
                         <div class="text-center">
                             <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                         </div>

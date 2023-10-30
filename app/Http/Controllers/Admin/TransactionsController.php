@@ -38,10 +38,11 @@ class TransactionsController extends Controller
     }
 
     public function externalCreate() {
+        $latestId = Transaction::all()->count() + 1;
         $banks = Bank::all();
         $amtTypes = TransactionConstants::AMT_TYPE;
         $categories = Category::all();
-        return view('masters.transactions.external-create', compact('banks', 'amtTypes', 'categories'));
+        return view('masters.transactions.external-create', compact('banks', 'amtTypes', 'categories', 'latestId'));
     }
 
     public function externalStore(Request $request) {
