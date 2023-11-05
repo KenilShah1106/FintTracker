@@ -37,6 +37,14 @@
                     <span class="nav-link-text fs-5 ms-1">Financial Goals</span>
                 </a>
             </li>
+            <li class="nav-item my-2">
+                <a class="nav-link active" href="{{ route('financial_goals.index') }}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fa fa-shopping-cart fa-2x text-primary opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text fs-5 ms-1">Rewards</span>
+                </a>
+            </li>
         </ul>
     </div>
 </aside>

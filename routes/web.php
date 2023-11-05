@@ -19,4 +19,6 @@ Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('h
 
 Route::post("/store-image", [DashboardController::class, "storeImageFromUri"])->name("storeImageFromUri");
 
+Route
+
 
