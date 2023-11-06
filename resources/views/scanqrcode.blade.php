@@ -9,14 +9,10 @@
 
 @section('page-styles')
 <style>
-   /*main {
-        display: flex;
-        justify-content: center;
-        align-items: center;  
-    }*/
     main{
         margin-left: 15rem;
-        color:#FFF;
+        color: #FFF;
+        background-color: #5e72e4;
     }
     #reader {
         width: 600px;
@@ -27,6 +23,23 @@
         font-size: 1.5rem;
         color:#FFF;
     }
+
+@media only screen and (max-width: 720px) {
+    main{
+        margin-left: 5rem;
+        color: #FFF;
+        background-color: #5e72e4;
+    }
+    #reader {
+        width: 300px;
+        color:#FFF;
+    }
+    #result {
+        text-align: center;
+        font-size: 1rem;
+        color:#FFF;
+    }
+}
 </style> 
 @endsection
 
