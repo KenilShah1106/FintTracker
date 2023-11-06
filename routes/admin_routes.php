@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
 Route::get('/dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'dashboard'])->name('dashboard');
 Route::get('transactions/external/create/', [TransactionsController::class,'externalCreate'])->name('transactions.externalCreate');
 Route::post('transactions/external/store/', [TransactionsController::class,'externalStore'])->name('transactions.externalStore');

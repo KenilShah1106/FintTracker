@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\QRCodeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,8 +16,18 @@ use Illuminate\Support\Facades\Route;
 */
 \Illuminate\Support\Facades\Auth::routes();
 
+
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/scan-qr-code', function () {
+    return view('scanqrcode');
+});
+
+// Route::get("/scan-qr-code", [QRCodeController::class,'scanQRCode']);
+// Route::post("/process-qr-code", [QRCodeController::class,'processQRCode']);
 
 Route::post("/store-image", [DashboardController::class, "storeImageFromUri"])->name("storeImageFromUri");
+
+
+
 
 

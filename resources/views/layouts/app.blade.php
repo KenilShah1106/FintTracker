@@ -28,6 +28,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
+    <!-- <script src="node_modules/html5-qrcode/html5-qrcode.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js" integrity="sha512-r6rDA7W6ZeQhvl8S7yRVQUKVHdexq+GAlNkNNqVC7YyIV+NwqCTJe2hDWCiffTyRNOeGEzRRJ9ifvRm/HCzGYg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @yield('page-styles')
@@ -54,7 +58,7 @@
 </main>
 
 <!--   Core JS Files   -->
-<script src="{{asset("./assets/js/core/popper.min.js")}}"></script>
+<script src="{{asset("./assets/js/core/popper.min.js")}}"></>
 <script src="{{asset("./assets/js/core/bootstrap.min.js")}}"></script>
 <script src="{{asset("./assets/js/plugins/perfect-scrollbar.min.js")}}"></script>
 <script src="{{asset("./assets/js/plugins/smooth-scrollbar.min.js")}}"></script>
