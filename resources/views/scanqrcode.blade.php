@@ -46,6 +46,8 @@
 @section('page-scripts')
 <!-- <script src="{{ asset('node_modules/html5-qrcode/html5-qrcode.min.js') }}"></script> -->
 <script>
+    const keywords = ["Amazon", "Flipkart", "Ajio","Zomato","ICICI"];
+    let checkFlag = false;
     const scanner = new Html5QrcodeScanner('reader', {
         qrbox: {
             width: 250,
@@ -61,8 +63,17 @@
         // <h2>Success!</h2>
         // <p><a href="${result}">${result}</a></p>
         // `;
-
-        window.confirm("Are you sure you want to continue?");
+        for(let i=0;i<keywords.length;i++){
+            if(result.includes(keywords[i].toLowerCase())){
+                checkFlag=true;
+                window.confirm("You have reavhed the limit fot the category, still want to proceed?");
+                
+            }
+        }
+        if(checkFlag!=true){
+            window.confirm("You havent reached the limit wanna try offers?");
+        }
+        
 
         scanner.clear();
         document.getElementById('reader').remove();
