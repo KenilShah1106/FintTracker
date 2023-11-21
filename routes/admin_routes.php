@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
 Route::get('/dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'dashboard'])->name('dashboard');
 Route::get("rewards", [RewardsController::class, 'index'])->name("rewards.index");
 Route::post("update-reward-points", [RewardsController::class, 'updateRewardPoints'])->name("updateRewardPoints");
