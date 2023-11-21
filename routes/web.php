@@ -18,7 +18,3 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::post("/store-image", [DashboardController::class, "storeImageFromUri"])->name("storeImageFromUri");
-
-Route
-
-

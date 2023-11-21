@@ -23075,3 +23075,13 @@ body {
 .footer {
   min-height: 150px;
 }
+
+.product-card .card-title {
+  overflow: hidden;
+}
+.product-card img {
+  transition: transform 0.3s ease-in-out;
+}
+.product-card img:hover {
+  transform: scale(1.2);
+}

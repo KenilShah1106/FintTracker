@@ -39,5 +39,29 @@ class ProductSeeder extends Seeder
             'image_path' => 'https://hdqwalls.com/wallpapers/amazon-4k-logo-qhd.jpg',
             'price' => 500,
         ]);
+        Product::create([
+            'name' => "Smartwatch",
+            'description' => "A smartwatch with a cool design",
+            'image_path' => 'https://images.unsplash.com/photo-1617625802912-cde586faf331?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+            'price' => 8000,
+        ]);
+        Product::create([
+            'name' => "Thermos Bottle",
+            'description' => "A durable Thermos bottle, perfect for maintaining the temperature of your beverages for extended periods",
+            'image_path' => 'https://images.unsplash.com/photo-1648919725390-1eec35fdf32c?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+            'price' => 2500,
+        ]);
+        Product::create([
+            'name' => "Keyboard cover",
+            'description' => "A durable keyboard cover that protects from dust and spills, with clear markings for easy typing",
+            'image_path' => 'https://images.unsplash.com/photo-1542435503-956c469947f6?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+            'price' => 900,
+        ]);
+        Product::create([
+            'name' => "Trimmer",
+            'description' => "A high-quality trimmer for precise grooming",
+            'image_path' => 'https://images.unsplash.com/photo-1614095431984-d5f26e5c99f7?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+            'price' => 3500,
+        ]);
     }
 }

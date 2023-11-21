@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\FinancialGoalsController;
 use App\Http\Controllers\Admin\TransactionsController;
+use App\Http\Controllers\Admin\RewardsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'dashboard'])->name('dashboard');
+Route::get("rewards", [RewardsController::class, 'index'])->name("rewards.index");
+Route::post("update-reward-points", [RewardsController::class, 'updateRewardPoints'])->name("updateRewardPoints");
+
 Route::get('transactions/external/create/', [TransactionsController::class,'externalCreate'])->name('transactions.externalCreate');
 Route::post('transactions/external/store/', [TransactionsController::class,'externalStore'])->name('transactions.externalStore');
 
@@ -22,6 +26,7 @@ Route::resource('transactions', App\Http\Controllers\Admin\TransactionsControlle
 Route::post('transactions/getTransactions/ajax', [\App\Http\Controllers\Admin\TransactionsController::class, 'getTransactionsJson'])->name('transactions.getTransactionJson');
 
 Route::resource('financial_goals', FinancialGoalsController::class);
+
 
 
 

@@ -31,6 +31,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @yield('page-styles')
+    @yield('page-scripts')
     <style>
         label {
             font-size: 1rem;
@@ -76,7 +77,7 @@
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
 
-@yield('page-scripts')
+
 
 </body>
 </html>

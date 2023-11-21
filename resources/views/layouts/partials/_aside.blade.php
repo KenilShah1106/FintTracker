@@ -13,6 +13,11 @@
     <hr class="horizontal dark mb-5">
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
         <ul class="navbar-nav">
+            <li class="nav-item my-2 text-center">
+                <div class="nav-link active d-block">
+                    <span class="nav-link-text fs-5 ms-1">Points: {{auth()->user()->reward_points == null ? 0 : auth()->user()->reward_points}}</span>
+                </div>
+            </li>
             <li class="nav-item my-2">
                 <a class="nav-link active" href="{{route('dashboard')}}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -38,7 +43,7 @@
                 </a>
             </li>
             <li class="nav-item my-2">
-                <a class="nav-link active" href="{{ route('financial_goals.index') }}">
+                <a class="nav-link active" href="{{ route('rewards.index') }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fa fa-shopping-cart fa-2x text-primary opacity-10"></i>
                     </div>
