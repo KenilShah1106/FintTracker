@@ -22,7 +22,7 @@
     },
     "dependencies": {
         "apexcharts": "^3.36.3",
-        "jquery": "^3.6.3",
+        "jquery": "^3.7.1",
         "select2": "^4.1.0-rc.0"
     }
 }
