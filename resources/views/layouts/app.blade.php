@@ -35,7 +35,8 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @yield('page-styles')
-    @yield('page-scripts')
+    {{-- <script src="http://code.jquery.com/jquery-1.10.2.js"></script> --}}
+    {{-- @yield('page-scripts') --}}
     <style>
         label {
             font-size: 1rem;
@@ -79,9 +80,10 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <!-- Scripts -->
+
 <script src="{{ asset('js/app.js') }}"></script>
 
-
+@yield('page-scripts')
 
 </body>
 </html>
