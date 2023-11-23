@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\RewardsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QRCodeController;
 use App\Http\Controllers\KeywordController;
@@ -27,6 +28,8 @@ Route::get('/get-keywords', [KeywordController::class,'getKeywords']);
 Route::get('/payment', function () {
     return view('paymentsuccessfull');
 })->name('paymentsuccess');
+
+Route::get('/payment-cancel', [RewardsController::class, 'paymentCancel'])->name('paymentcancel');
 
 Route::post("/store-image", [DashboardController::class, "storeImageFromUri"])->name("storeImageFromUri");
 

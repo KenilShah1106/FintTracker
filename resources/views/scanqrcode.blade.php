@@ -18,7 +18,7 @@
     main{
         margin-left: 15rem;
         color: #FFF;
-        background-color: #5e72e4;
+        background-color: #6f42c1;
     }
     #reader {
         width: 600px;
@@ -34,7 +34,7 @@
     main{
         margin-left: 5rem;
         color: #FFF;
-        background-color: #5e72e4;
+        background-color: #6f42c1;
     }
     #reader {
         width: 300px;
@@ -46,7 +46,7 @@
         color:#FFF;
     }
 }
-</style> 
+</style>
 @endsection
 
 @section('page-scripts')
@@ -63,7 +63,7 @@
         .then(data => {
             console.log(data);
             keywords = data;
-           
+
         })
         .catch(error => console.error(error));
 
@@ -90,14 +90,14 @@
         for(let i=0;i<keywords.length;i++){
             if(isShopping && keywords[i]['Category'] == 'Shopping'){
                 warningFlag=true;
-                showCustomModal("Warning", "You have reached the limit for the category, still want to proceed?");
-                
+                showCustomModal("Warning", "A threshold has been reached for shopping. Do you want to continue? If you continue, you will lose the rewards for this transaction.");
+
             }
         }
         if(warningFlag!=true){
             showCustomModalSecond("Information", "You haven't reached the limit. Wanna try offers?");
         }
-        
+
 
         scanner.clear();
         document.getElementById('reader').remove();
@@ -107,7 +107,7 @@
         console.error(err);
     }
 
-  
+
         function showCustomModal(title, message) {
         const modal = `
         <div class="modal fade" id="customModal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -115,7 +115,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">${title}</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -123,8 +123,8 @@
       ${message}
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal"><a href="{{ route('paymentsuccess') }}">Yes</a></button>
-        <button type="button" class="btn btn-primary"><a href="{{ route('dashboard') }}">No</a></button>
+        <button type="button" class="btn btn-secondary"><a href="{{ route('paymentsuccess') }}">Yes</a></button>
+        <button type="button" class="btn btn-primary"><a href="{{ route('paymentcancel') }}">No</a></button>
       </div>
     </div>
   </div>

@@ -21,4 +21,12 @@ class RewardsController extends Controller
             'reward_points' => $reward_points,
         ]);
     }
+
+    public function paymentCancel()
+    {
+        auth()->user()->update([
+            'reward_points' => auth()->user()->reward_points + 100,
+        ]);
+        return view('paymentcancel');
+    }
 }
