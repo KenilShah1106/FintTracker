@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QRCodeController;
+use App\Http\Controllers\KeywordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,10 +21,12 @@ use App\Http\Controllers\QRCodeController;
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/scan-qr-code', function () {
     return view('scanqrcode');
-});
+})->name('scanqrcode');
+Route::get('/get-keywords', [KeywordController::class,'getKeywords']);
 
-// Route::get("/scan-qr-code", [QRCodeController::class,'scanQRCode']);
-// Route::post("/process-qr-code", [QRCodeController::class,'processQRCode']);
+Route::get('/payment', function () {
+    return view('paymentsuccessfull');
+})->name('paymentsuccess');
 
 Route::post("/store-image", [DashboardController::class, "storeImageFromUri"])->name("storeImageFromUri");
 

@@ -32,6 +32,10 @@
                 <span class=""><i class="fa fa-credit-card"></i></span>
                 <span class="btn-inner--text">Add Transactions</span>
             </a>
+            <a href="{{ route('scanqrcode') }}" class="btn btn-outline-white btn-icon text-white" type="button">
+                <span class=""><i class="fa fa-credit-card"></i></span>
+                <span class="btn-inner--text">Pay via QR</span>
+            </a>
         </div>
     </div>
     @include('masters.transactions.partials._index')

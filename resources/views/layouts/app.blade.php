@@ -22,6 +22,8 @@
     <link href={{asset("./assets/css/nucleo-svg.css")}} rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"/>
 
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbs5zLh/AzP8Fc6FZ1l+qD2IfUkwKZNNZtVXL2Av7qzweQ6hFtgBv3L+IiI8ZFA" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-pzjw8P+9IISXvKmbdO+KuG5kzf6fWeR1Y2zq49YD9J68wGFlx1q2r4Wq8t5P8p+c" crossorigin="anonymous"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
 
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
