@@ -15,6 +15,11 @@
         <ul class="navbar-nav">
             <li class="nav-item my-2 text-center">
                 <div class="nav-link active d-block">
+                    <span class="nav-link-text fs-5 ms-1">Threshold: Rs {{auth()->user()->reward_points == null ? 0 : auth()->user()->threshold}}</span>
+                </div>
+            </li>
+            <li class="nav-item my-2 text-center">
+                <div class="nav-link active d-block">
                     <span class="nav-link-text fs-5 ms-1">Points: {{auth()->user()->reward_points == null ? 0 : auth()->user()->reward_points}}</span>
                 </div>
             </li>

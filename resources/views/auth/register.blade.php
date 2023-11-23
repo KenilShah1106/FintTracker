@@ -61,6 +61,11 @@
                                 <input name="per_month_salary" type="number" class="@error('per_month_salary') is-invalid @enderror form-control form-control-user" id="exampleInputEmail"
                                        placeholder="Per month Salary">
                             </div>
+
+                            <div class="form-group">
+                                <input name="threshold" type="number" class="@error('threshold') is-invalid @enderror form-control form-control-user" id="exampleInputEmail"
+                                       placeholder="Threshold">
+                            </div>
                             <div class="row">
                                 <button type="submit" class="btn btn-primary btn-user btn-block">
                                     {{ __('Register') }}

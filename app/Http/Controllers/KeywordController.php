@@ -28,7 +28,9 @@ class KeywordController extends Controller
             // Execute your Python script and get the output
             // $command = escapeshellcmd('threshholdkeywords.py');
             $pythonScriptPath = '"E:\sync\college\S.P.I.T\sem-7\major-project\moneywiz\app\Http\Controllers\Admin\scripts\threshholdkeywords.py"';
-            $pythonScriptOutput = shell_exec("python $pythonScriptPath 2>&1");
+            $threshold = auth()->user()->threshold;
+            $command = escapeshellcmd("python $pythonScriptPath $threshold");
+            $pythonScriptOutput = shell_exec($command);
             // Decode the JSON output
             return $pythonScriptOutput;
             // return json_decode($pythonScriptOutput, true);
