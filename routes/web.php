@@ -33,6 +33,7 @@ Route::get('/payment-cancel', [RewardsController::class, 'paymentCancel'])->name
 
 Route::post("/store-image", [DashboardController::class, "storeImageFromUri"])->name("storeImageFromUri");
 
+Route::post('/storeInDb', [DashboardController::class, 'storeInDbFromChat'])->name('storeInDbFromChat');
 
 
 

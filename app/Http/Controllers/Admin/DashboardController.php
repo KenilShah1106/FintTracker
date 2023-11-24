@@ -11,6 +11,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 
 class DashboardController extends Controller
@@ -125,6 +126,48 @@ class DashboardController extends Controller
         $pdf->save($pdfFileName);
         File::deleteDirectory($path);
         return $pdf->stream();
+    }
+
+    public function storeInDbFromChat(Request $request) {
+        $api = $request->api;
+
+        $response = Http::get($api);
+
+        if(Transaction::count('*') > 0) {
+            $balance = Transaction::latest()->get()->first()->balance;
+        }
+        else {
+            $balance = 0;
+        }
+
+
+        $responseBody = $response->json("body");
+        $ref = Transaction::all()->last()->reference_no;
+        $ref += 1;
+        $desc = $responseBody['Desc']['value']['resolvedValues'][0];
+        $date = $responseBody['Date']['value']['resolvedValues'][0];
+        $amount = $responseBody['Amount']['value']['resolvedValues'][0];
+        $category = $responseBody['Cat']['value']['resolvedValues'][0];
+        $amtType = $responseBody['AmtType']['value']['resolvedValues'][0];
+        $type = TransactionConstants::CASH;
+        $balance = $amtType == "DEBIT" ? $balance - $amount : $balance + $amount;
+
+        Transaction::create([
+            'reference_no' => $ref,
+            'date' => $date,
+            'description' => $desc,
+            'amt_type' => $amtType,
+            'amt_debit' => $amtType == "DEBIT" ? $amount: null,
+            'amt_credit' => $amtType == "CREDIT" ? $amount: null,
+            'balance' => $amtType == "DEBIT" ? $balance - $amount : $balance + $amount,
+            'category_id' => Category::where('name', "food")->get()->first()->id,
+            'user_id' => auth()->id(),
+            'type' => $type,
+        ]);
+
+        return response()->json([
+            "success" => "Transaction inserted successfully!"
+        ]);
     }
 
 }

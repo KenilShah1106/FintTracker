@@ -22,8 +22,6 @@
     <link href={{asset("./assets/css/nucleo-svg.css")}} rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"/>
 
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbs5zLh/AzP8Fc6FZ1l+qD2IfUkwKZNNZtVXL2Av7qzweQ6hFtgBv3L+IiI8ZFA" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-pzjw8P+9IISXvKmbdO+KuG5kzf6fWeR1Y2zq49YD9J68wGFlx1q2r4Wq8t5P8p+c" crossorigin="anonymous"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
 
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
@@ -64,11 +62,14 @@
     <!-- Navbar -->
     @include('layouts.partials._navbar')
     <!-- End Navbar -->
-    <div class="container-fluid py-4">
+    <div class="container-fluid py-4" style="position: relative">
         @include('layouts.partials._message')
         @yield('page-content')
+
+        <button onclick="storeInDb()" class="fixed-bottom btn btn-secondary d-flex justify-content-center align-items-center" style="left:125px;border-radius:999px;width:50px;z-index:9999"><span><i class="fa fa-share"></i></span></button>
     </div>
     @include('layouts.partials._footer')
+    @include('layouts.partials._modals')
 </main>
 
 <!--   Core JS Files   -->
@@ -94,8 +95,35 @@
 <!-- Scripts -->
 
 <script src="{{ asset('js/app.js') }}"></script>
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 @yield('page-scripts')
+
+<script>
+    console.log()
+    function storeInDb() {
+        // $("#transactionSuccessModal").modal('show');
+        var api = "https://9lbjuz4hwd.execute-api.us-east-1.amazonaws.com/moneywiz/dev";
+
+        $.ajax({
+            url: "{{route('storeInDbFromChat')}}",
+            type: 'POST',
+            data: {
+                _token: "{{ csrf_token() }}",
+                api: api
+            },
+            success: function(response) {
+                $("#transactionSuccessModal").modal('show');
+            },
+            error: function(response) {
+                console.error(response);
+            }
+        })
+    }
+</script>
 
 </body>
 </html>
