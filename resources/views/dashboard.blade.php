@@ -155,6 +155,56 @@
             </div>
         </div>
     </div>
+
+    <div class="row justify-content-sm-around mt-5">
+        <div class="card mb-3 p-1 d-flex justify-content-center col-md-5">
+            <div class="card-title p-3 fw-bolder fs-2">Bubble chart</div>
+                <div class="card-body p-3">
+                    <div id="bubble_chart"></div>
+                </div>
+        </div>
+        <div class="card mb-3 p-1 d-flex justify-content-center col-md-5">
+            <div class="card-title p-3 fw-bolder fs-2">Heatmap</div>
+                <div class="card-body p-3">
+                    <div id="heatmap_chart"></div>
+                </div>
+        </div>
+    </div>
+   
+
+    <div class="row justify-content-sm-around mt-5">
+        <div class="card mb-3 p-1 d-flex justify-content-center col-md-5">
+            <div class="card-title p-3 fw-bolder fs-2">Treemap</div>
+                <div class="card-body p-3">
+                    <div id="treemap_chart"></div>
+                </div>
+        </div>
+        <div class="card mb-3 p-1 d-flex justify-content-center col-md-5">
+        <div class="card-title p-3 fw-bolder fs-2">Radar Chart</div>
+        <div class="card-body p-3">
+            <div id="radar_chart"></div>
+        </div>
+    </div>
+    </div>
+   
+    <div class="row justify-content-sm-around mt-5">
+        <div class="card mb-3 p-1 d-flex justify-content-center col-md-5">
+            <div class="card-title p-3 fw-bolder fs-2">Polar Area Chart</div>
+            <div class="card-body p-3">
+                <div id="polar_area_chart"></div>
+            </div>
+        </div>
+
+        <div class="card mb-3 p-1 d-flex justify-content-center col-md-5">
+            <div class="card-title p-3 fw-bolder fs-2">Box Plot</div>
+                <div class="card-body p-3">
+                    <div id="box_plot_chart"></div>
+                </div>
+        </div>
+        
+    </div>
+
+
 @endsection
 
 @section('page-scripts')
@@ -373,6 +423,83 @@
             }
         };
 
+        let heatmapData = [
+    {
+        x: 'Shopping',
+        y: 'UPI',
+        value: 200  // intensity
+    },
+    {
+        x: 'Finance',
+        y: 'Bank Transfer',
+        value: 150
+    },
+    // Add more data points for other categories and types...
+];
+
+var heatmapOptions = {
+    series: [{
+        data: heatmapData
+    }],
+    chart: {
+        height: 350,
+        type: 'heatmap',
+    },
+    plotOptions: {
+        heatmap: {
+            radius: 10,  // adjust the radius of each data point
+        }
+    },
+    dataLabels: {
+        enabled: false
+    },
+    title: {
+        text: 'Heatmap',
+        align: 'left'
+    },
+    xaxis: {
+        type: 'category',
+        categories: ['Shopping', 'Finance', 'Travel', 'Food', 'Miscellaneous']
+    },
+    yaxis: {
+        type: 'category',
+        categories: ['UPI', 'Bank Transfer', 'Cash']
+    },
+    colorScale: {
+        ranges: [
+            {
+                from: 0,
+                to: 100,
+                color: '#D9534F',  // color for lower intensity
+                name: 'Low'
+            },
+            {
+                from: 101,
+                to: 200,
+                color: '#5BC0DE',  // color for medium intensity
+                name: 'Medium'
+            },
+            {
+                from: 201,
+                to: 300,
+                color: '#5CB85C',  // color for higher intensity
+                name: 'High'
+            }
+        ]
+    },
+    tooltip: {
+        custom: function ({ series, seriesIndex, dataPointIndex, w }) {
+            return '<div class="tooltip">' +
+                '<span>' + w.globals.labels[dataPointIndex.y] + ' - ' + w.globals.labels[dataPointIndex.x] + '</span>' +
+                '<span>Intensity: ' + w.config.series[seriesIndex].data[dataPointIndex].value + '</span>' +
+                '</div>';
+        }
+    }
+};
+
+var heatmapChart = new ApexCharts(document.querySelector("#heatmap_chart"), heatmapOptions);
+heatmapChart.render();
+
         var transactionLineChart = new ApexCharts(document.querySelector("#transaction_type_line"), typeOptionsLine);
         transactionLineChart.render();
 
@@ -420,6 +547,268 @@
                 generateReport(transactionPieChart);
             });
         }, 1000);
+
+        let bubbleChartData = [
+    {
+        x: 'Shopping',
+        y: 200,  // transaction amount
+        z: 10   // bubble size
+    },
+    {
+        x: 'Finance',
+        y: 150,
+        z: 8
+    },
+    // Add more data points for other categories...
+];
+
+let treemapData = [
+    {
+        x: 'Shopping',
+        y: 'UPI',
+        value: 200  // transaction amount
+    },
+    {
+        x: 'Shopping',
+        y: 'Bank Transfer',
+        value: 100
+    },
+    {
+        x: 'Finance',
+        y: 'UPI',
+        value: 150
+    },
+    {
+        x: 'Finance',
+        y: 'Bank Transfer',
+        value: 120
+    },
+    // Add more data points for other categories and types...
+];
+
+var treemapOptions = {
+    series: [{
+        data: treemapData
+    }],
+    chart: {
+        height: 350,
+        type: 'treemap',
+    },
+    title: {
+        text: 'Treemap',
+        align: 'left'
+    },
+    tooltip: {
+        custom: function ({ series, seriesIndex, dataPointIndex, w }) {
+            return '<div class="tooltip">' +
+                '<span>' + w.globals.labels[dataPointIndex.x] + ' - ' + w.globals.labels[dataPointIndex.y] + '</span>' +
+                '<span>Transaction Amount: &#8377;' + w.config.series[seriesIndex].data[dataPointIndex].value + '</span>' +
+                '</div>';
+        }
+    }
+};
+
+var treemapChart = new ApexCharts(document.querySelector("#treemap_chart"), treemapOptions);
+treemapChart.render();
+
+var bubbleChartOptions = {
+    series: [{
+        data: bubbleChartData
+    }],
+    chart: {
+        height: 350,
+        type: 'bubble',
+    },
+    dataLabels: {
+        enabled: false
+    },
+    title: {
+        text: 'Bubble Chart',
+        align: 'left'
+    },
+    xaxis: {
+        type: 'category',
+        categories: ['Shopping', 'Finance', 'Travel', 'Food', 'Miscellaneous']
+    },
+    yaxis: {
+        title: {
+            text: 'Transaction Amount'
+        }
+    },
+    tooltip: {
+        custom: function ({ series, seriesIndex, dataPointIndex, w }) {
+            return '<div class="tooltip">' +
+                '<span>' + w.globals.labels[dataPointIndex] + '</span>' +
+                '<span>Transaction Amount: &#8377;' + w.config.series[seriesIndex].data[dataPointIndex].y + '</span>' +
+                '<span>Bubble Size: ' + w.config.series[seriesIndex].data[dataPointIndex].z + '</span>' +
+                '</div>';
+        }
+    }
+};
+
+// Assuming you have the necessary data for the Polar Area Chart
+let polarAreaChartData = [
+    {
+        category: 'Shopping',
+        amount: 200
+    },
+    {
+        category: 'Finance',
+        amount: 150
+    },
+    // Add more data points for other categories...
+];
+
+var polarAreaChartOptions = {
+    series: polarAreaChartData.map(data => data.amount),
+    chart: {
+        height: 350,
+        type: 'polarArea',
+    },
+    title: {
+        text: 'Polar Area Chart',
+        align: 'left'
+    },
+    labels: polarAreaChartData.map(data => data.category),
+    fill: {
+        opacity: 0.8,
+        colors: ['#5CB85C', '#5BC0DE', '#D9534F', '#F0AD4E', '#337AB7'] // Customize colors as needed
+    },
+    tooltip: {
+        custom: function ({ series, seriesIndex, dataPointIndex, w }) {
+            const category = w.globals.labels[dataPointIndex];
+            const amount = w.config.series[seriesIndex][dataPointIndex];
+
+            return '<div class="tooltip">' +
+                '<span>' + category + '</span>' +
+                '<span>Amount: &#8377;' + amount + '</span>' +
+                '</div>';
+        }
+    }
+};
+
+var polarAreaChart = new ApexCharts(document.querySelector("#polar_area_chart"), polarAreaChartOptions);
+polarAreaChart.render();
+
+
+// Assuming you have the necessary data for the Radar Chart
+let radarChartData = [
+    {
+        category: 'Shopping',
+        amount: 200,
+        frequency: 5,
+        // Add more attributes...
+    },
+    {
+        category: 'Finance',
+        amount: 150,
+        frequency: 3,
+        // Add more attributes...
+    },
+    // Add more data points for other categories...
+];
+
+let boxPlotData = [
+    {
+        category: 'Shopping',
+        amounts: [100, 150, 200, 250, 300, 400] // Example amounts for Shopping category
+    },
+    {
+        category: 'Finance',
+        amounts: [50, 100, 150, 200, 250, 300] // Example amounts for Finance category
+    },
+    // Add more data points for other categories...
+];
+
+var boxPlotOptions = {
+    series: boxPlotData.map(data => ({
+        name: data.category,
+        data: [data.amounts]
+    })),
+    chart: {
+        height: 350,
+        type: 'boxPlot',
+    },
+    title: {
+        text: 'Box Plot',
+        align: 'left'
+    },
+    xaxis: {
+        categories: boxPlotData.map(data => data.category),
+    },
+    yaxis: {
+        title: {
+            text: 'Transaction Amount'
+        }
+    },
+    tooltip: {
+        custom: function ({ series, seriesIndex, dataPointIndex, w }) {
+            const category = w.globals.labels[dataPointIndex];
+            const q1 = w.config.series[seriesIndex].data[dataPointIndex].q1;
+            const median = w.config.series[seriesIndex].data[dataPointIndex].median;
+            const q3 = w.config.series[seriesIndex].data[dataPointIndex].q3;
+            const low = w.config.series[seriesIndex].data[dataPointIndex].low;
+            const high = w.config.series[seriesIndex].data[dataPointIndex].high;
+
+            return '<div class="tooltip">' +
+                '<span>' + category + '</span>' +
+                '<span>Q1: &#8377;' + q1 + '</span>' +
+                '<span>Median: &#8377;' + median + '</span>' +
+                '<span>Q3: &#8377;' + q3 + '</span>' +
+                '<span>Low: &#8377;' + low + '</span>' +
+                '<span>High: &#8377;' + high + '</span>' +
+                '</div>';
+        }
+    }
+};
+
+var boxPlotChart = new ApexCharts(document.querySelector("#box_plot_chart"), boxPlotOptions);
+boxPlotChart.render();
+
+var radarChartOptions = {
+    series: [{
+        name: 'Attributes',
+        data: radarChartData.map(data => [data.amount, data.frequency]) // Map your attributes here
+    }],
+    chart: {
+        height: 350,
+        type: 'radar',
+    },
+    title: {
+        text: 'Radar Chart',
+        align: 'left'
+    },
+    xaxis: {
+        categories: radarChartData.map(data => data.category),
+    },
+    yaxis: {
+        labels: {
+            show: false, // You can customize this based on your preference
+        }
+    },
+    tooltip: {
+        custom: function ({ series, seriesIndex, dataPointIndex, w }) {
+            const category = w.globals.labels[dataPointIndex];
+            const amount = w.config.series[seriesIndex].data[dataPointIndex][0];
+            const frequency = w.config.series[seriesIndex].data[dataPointIndex][1];
+
+            return '<div class="tooltip">' +
+                '<span>' + category + '</span>' +
+                '<span>Amount: &#8377;' + amount + '</span>' +
+                '<span>Frequency: ' + frequency + '</span>' +
+                '</div>';
+        }
+    }
+};
+
+var radarChart = new ApexCharts(document.querySelector("#radar_chart"), radarChartOptions);
+radarChart.render();
+
+
+var bubbleChart = new ApexCharts(document.querySelector("#bubble_chart"), bubbleChartOptions);
+bubbleChart.render();
+
+
 
         function generateReport(transactionPieChart) {
             let transactionPieImage,categoryPieImage, categoryAmountImage, categoryMonthAmountImage, transactionLineImage, categoryLineImage;
